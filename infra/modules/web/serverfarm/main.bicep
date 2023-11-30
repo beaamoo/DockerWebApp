@@ -60,6 +60,9 @@ param diagnosticSettings diagnosticSettingType
 @description('Optional. When true, this App Service Plan will perform availability zone balancing.')
 param zoneRedundant bool = false
 
+@description('Optional. The kind of the App Service Plan, e.g., Windows, Linux.')
+param kind string = ''
+
 // ============ //
 // Dependencies //
 // ============ //
@@ -101,8 +104,10 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
     targetWorkerCount: targetWorkerCount
     targetWorkerSizeId: targetWorkerSize
     zoneRedundant: zoneRedundant
+    kind: !empty(kind) ? kind : null // Add this line
   }
 }
+
 
 resource appServicePlan_diagnosticSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for (diagnosticSetting, index) in (diagnosticSettings ?? []): {
   name: diagnosticSetting.?name ?? '${name}-diagnosticSettings'
