@@ -8,7 +8,7 @@ on:
 
 env:
   RESOURCE_GROUP_DEV: aguadamillas_students_1
-  SUBSCRIPTION_ID_DEV: e0b9cada-61bc-4b5a-bd7a-52c606726b3b
+  SUBSCRIPTION_ID_DEV: /subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b
   USER_ALIAS: beaamoo
   
 
@@ -60,7 +60,7 @@ jobs:
       - name: deploy-key-vault
         uses: azure/arm-deploy@v1.0.9
         with:
-          scope: /subscriptions/${{ env.SUBSCRIPTION_ID_DEV }}/resourceGroups/${{ env.RESOURCE_GROUP_DEV }}
+          scope: /subscriptions/${{ env.SUBSCRIPTION_ID_DEV }}
           subscriptionId: ${{ env.SUBSCRIPTION_ID_DEV }}
           resourceGroupName: ${{ env.RESOURCE_GROUP_DEV }}
           template: infra/key-vault.bicep  
