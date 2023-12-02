@@ -45,7 +45,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Extract Tenant ID
         id: get-tenant-id
-        run: echo "::set-output name=tenantId::$(echo ${{ secrets.AZURE_CREDENTIALS }} | jq -r '.tenantId')"
+        run: echo "::set-output name=tenantId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.tenantId')"
       - name: Deploy Key Vault and ACR
         uses: azure/arm-deploy@v1.0.9
         with:
