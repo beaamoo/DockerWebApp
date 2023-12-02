@@ -63,10 +63,9 @@ module website 'modules/web/site/main.bicep' =  {
     }
     appSettingsKeyValuePairs: {
       WEBSITES_ENABLE_APP_SERVICE_STORAGE: false
-      dockerRegistryServerUrl: 'https://${containerRegistryName}.azurecr.io'
-      dockerRegistryServerUserName: kevVaultSecretNameACRUsername
-      dockerRegistryServerPassword: kevVaultSecretNameACRPassword1
-
     }
+      dockerRegistryServerUrl: 'https://${containerRegistryName}.azurecr.io'
+      dockerRegistryServerUserName: keyvault.getSecret(kevVaultSecretNameACRUsername) 
+      dockerRegistryServerPassword: keyvault.getSecret(kevVaultSecretNameACRPassword1)
   }
 }

@@ -152,7 +152,7 @@ param hybridConnectionRelays array = []
 ])
 param publicNetworkAccess string = ''
 
-
+@secure()
 param dockerRegistryServerUrl string = ''
 
 @secure()
@@ -240,15 +240,15 @@ var dockerAppSettings = {
 module app_appsettings 'config--appsettings/main.bicep' = if (!empty(appSettingsKeyValuePairs)) {
   name: '${uniqueString(deployment().name, location)}-Site-Config-AppSettings'
   params: {
-    appName: app.name
-    kind: kind
-    storageAccountResourceId: storageAccountResourceId
-    appInsightResourceId: appInsightResourceId
-    setAzureWebJobsDashboard: setAzureWebJobsDashboard
-    appSettingsKeyValuePairs: union(appSettingsKeyValuePairs, dockerAppSettings)
-    enableDefaultTelemetry: enableReferencedModulesTelemetry
+   appName: app.name
+   kind: kind
+   storageAccountResourceId: storageAccountResourceId
+   appInsightResourceId: appInsightResourceId
+   setAzureWebJobsDashboard: setAzureWebJobsDashboard
+   appSettingsKeyValuePairs: union(appSettingsKeyValuePairs,dockerAppSettings)
+   enableDefaultTelemetry: enableReferencedModulesTelemetry
   }
-}
+ }
 
 module app_authsettingsv2 'config--authsettingsv2/main.bicep' = if (!empty(authSettingV2Configuration)) {
   name: '${uniqueString(deployment().name, location)}-Site-Config-AuthSettingsV2'

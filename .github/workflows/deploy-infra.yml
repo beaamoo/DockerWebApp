@@ -3,7 +3,7 @@ name: deploy-infra
 on:
   push:
     paths:
-      - '.infra/**' 
+      - 'infra/**' 
   workflow_dispatch:
 
 env:
