@@ -13,17 +13,6 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
 }
 
-resource acr 'Microsoft.ContainerRegistry/registries@2021-06-01-preview' = {
-  name: containerRegistryName
-  location: location
-  sku: {
-    name: 'Basic' // Or Standard, Premium, etc.
-  }
-  properties: {
-    adminUserEnabled: true
-  }
-}
-
 module containerRegistry 'modules/container-registry/registry/main.bicep' = {
   dependsOn: [
     keyvault
@@ -77,7 +66,7 @@ module website 'modules/web/site/main.bicep' =  {
       WEBSITES_ENABLE_APP_SERVICE_STORAGE: false
     }
       dockerRegistryServerUrl: 'https://${containerRegistryName}.azurecr.io'
-      dockerRegistryServerUserName: keyvault.getSecret(kevVaultSecretNameACRUsername) 
+      dockerRegistryServerUserName: keyvault.getSecret(kevVaultSecretNameACRUsername)
       dockerRegistryServerPassword: keyvault.getSecret(kevVaultSecretNameACRPassword1)
   }
 }

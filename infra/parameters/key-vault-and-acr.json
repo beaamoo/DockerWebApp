@@ -5,6 +5,9 @@
     "keyVaultName": {
       "value": "beaamoo-kv"
     },
+    "containerRegistryName": {
+      "value": "beaamooacr"
+    },
     "location": {
       "value": "Sweden Central"
     }
