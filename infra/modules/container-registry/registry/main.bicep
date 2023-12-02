@@ -15,6 +15,7 @@ param location string = resourceGroup().location
 
 @description('Optional. Array of role assignments to create.')
 param roleAssignments roleAssignmentType
+
 @description('Optional. Tier of your Azure container registry.')
 @allowed([
   'Basic'

@@ -10,7 +10,7 @@ env:
   RESOURCE_GROUP_DEV: aguadamillas_students_1
   SUBSCRIPTION_ID_DEV: e0b9cada-61bc-4b5a-bd7a-52c606726b3b
   USER_ALIAS: beaamoo
-  containerRegistryName: 'beaamooacr'  # Replace with actual ACR name
+  containerRegistryName: 'beaamooacr'
   keyVaultName: 'beaamoo-kv'
 
 jobs:
@@ -65,11 +65,11 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Assign Key Vault Secrets Officer Role to Service Principal
         run: |
-          az role assignment create --role "Key Vault Secrets Officer" --assignee ${{ secrets.SERVICE_PRINCIPAL_APP_ID }} --scope /subscriptions/${{ env.SUBSCRIPTION_ID_DEV }}/resourceGroups/${{ env.RESOURCE_GROUP_DEV }}/providers/Microsoft.KeyVault/vaults/${{ env.keyVaultName }}
+          az role assignment create --role "Key Vault Secrets Officer" --assignee ${{ secrets.SERVICE_PRINCIPAL_ID }} --scope /subscriptions/${{ env.SUBSCRIPTION_ID_DEV }}/resourceGroups/${{ env.RESOURCE_GROUP_DEV }}/providers/Microsoft.KeyVault/vaults/${{ env.keyVaultName }}
 
   setup-acr-credentials:
     runs-on: ubuntu-latest
-    needs: deploy-acr-and-keyvault
+    needs: assign-role
     steps:
       - uses: azure/login@v1
         with:
