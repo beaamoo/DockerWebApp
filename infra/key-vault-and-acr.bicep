@@ -1,6 +1,7 @@
 param keyVaultName string
 param containerRegistryName string
 param location string = resourceGroup().location
+param tenantId string
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: keyVaultName
@@ -10,7 +11,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       family: 'A'
       name: 'standard'
     }
-    tenantId: '<your-tenant-id>'  // Replace with your Azure tenant ID
+    tenantId: tenantId
     accessPolicies: []
   }
 }

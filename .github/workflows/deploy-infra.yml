@@ -22,12 +22,12 @@ jobs:
         run: |
           pwd
           ls -R
-      - name: Run Bicep Linter for key-vault.bicep
+      - name: Run Bicep Linter for key-vault-and-acr.bicep
         run: |
           pwd
           cd infra
           ls -R
-          az bicep build --file key-vault.bicep
+          az bicep build --file key-vault-and-acr.bicep
       - name: Run Bicep Linter for main.bicep
         run: |
           pwd
@@ -43,6 +43,9 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Extract Tenant ID
+        id: get-tenant-id
+        run: echo "::set-output name=tenantId::$(echo ${{ secrets.AZURE_CREDENTIALS }} | jq -r '.tenantId')"
       - name: Deploy Key Vault and ACR
         uses: azure/arm-deploy@v1.0.9
         with:
@@ -50,7 +53,7 @@ jobs:
           subscriptionId: ${{ env.SUBSCRIPTION_ID_DEV }}
           resourceGroupName: ${{ env.RESOURCE_GROUP_DEV }}
           template: ./infra/key-vault-and-acr.bicep
-          parameters: ./infra/parameters/key-vault-and-acr.json
+          parameters: ./infra/parameters/key-vault-and-acr.json tenantId=${{ steps.get-tenant-id.outputs.tenantId }}
           deploymentName: '${{env.USER_ALIAS}}-kv-acr'
 
   setup-acr-credentials:
