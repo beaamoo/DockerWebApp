@@ -4,12 +4,12 @@ on:
         paths:
             - 'app/**'
 env:
-    REGISTRY_LOGIN_SERVER: 'beaamoo.azurecr.io'
+    REGISTRY_LOGIN_SERVER: 'bmossberg.azurecr.io'
     KEY_VAULT_SECRET_NAME_ACR_USERNAME: 'acr-username'
     KEY_VALUE_SECRET_NAME_ACR_PASSWORD: 'acr-password1'
-    KEY_VAULT_NAME: 'beaamoo-kv'
-    IMAGE_BASE_NAME: 'beaamooapp-ex3'
-    AZURE_WEBAPP_NAME: 'beaamoo-ex3'
+    KEY_VAULT_NAME: 'bmossberg-kv'
+    IMAGE_BASE_NAME: 'bmossbergapp-ex3'
+    AZURE_WEBAPP_NAME: 'bmossberg-ex3'
 
 jobs:
     build:

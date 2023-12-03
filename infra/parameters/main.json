@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "keyVaultName": {
-            "value": "beaamoo-kv"
+            "value": "bmossberg-kv"
         },
         "containerRegistryName": {
-            "value": "beaamooacr"
+            "value": "bmossbergacr"
         },
         "appServicePlanName": {
-            "value": "beaamoo-asp"
+            "value": "bmossberg-asp"
         },
         "siteName": {
-            "value": "beaamoo-ex3"
+            "value": "bmossberg-ex3"
         },
         "containerRegistryImageName": {
-            "value": "beaamooapp-ex3"
+            "value": "bmossbergapp-ex3"
         }
     }
 }
