@@ -67,28 +67,9 @@ jobs:
         run: |
           az role assignment create --role "Key Vault Secrets Officer" --assignee ${{ secrets.SERVICE_PRINCIPAL_ID }} --scope /subscriptions/${{ env.SUBSCRIPTION_ID_DEV }}/resourceGroups/${{ env.RESOURCE_GROUP_DEV }}/providers/Microsoft.KeyVault/vaults/${{ env.keyVaultName }}
 
-  setup-acr-credentials:
-    runs-on: ubuntu-latest
-    needs: assign-role
-    steps:
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: 'Get ACR credentials'
-        run: |
-          ACR_CREDENTIALS=$(az acr credential show --name ${{ env.containerRegistryName }} --query "[username,passwords[0].value]" --output tsv)
-          ACR_USERNAME=$(echo $ACR_CREDENTIALS | cut -f1)
-          ACR_PASSWORD=$(echo $ACR_CREDENTIALS | cut -f2)
-          echo "ACR_USERNAME=$ACR_USERNAME" >> $GITHUB_ENV
-          echo "ACR_PASSWORD=$ACR_PASSWORD" >> $GITHUB_ENV
-      - name: 'Store ACR credentials in Key Vault'
-        run: |
-          az keyvault secret set --vault-name ${{ env.keyVaultName }} --name "acr-username" --value "${ACR_USERNAME}"
-          az keyvault secret set --vault-name ${{ env.keyVaultName }} --name "acr-password1" --value "${ACR_PASSWORD}"
-
   deploy-other-resources:
     runs-on: ubuntu-latest
-    needs: setup-acr-credentials
+    needs: deploy-acr-and-keyvault
     steps:
       - uses: actions/checkout@main
       - uses: azure/login@v1
