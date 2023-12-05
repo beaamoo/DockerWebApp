@@ -45,7 +45,7 @@ jobs:
       - name: deploy-key-vault
         uses: azure/arm-deploy@v1.0.9
         with:
-          scope: subscription
+          scope: resourcegroup
           subscriptionId: ${{ env.SUBSCRIPTION_ID_DEV }}
           resourceGroupName: ${{ env.RESOURCE_GROUP_DEV }}
           template: ./infra/key-vault.bicep
