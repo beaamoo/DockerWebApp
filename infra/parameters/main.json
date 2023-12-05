@@ -2,20 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "keyVaultName": {
-            "value": "bmossberg-kv"
-        },
-        "containerRegistryName": {
-            "value": "bmossbergacr"
-        },
-        "appServicePlanName": {
-            "value": "bmossberg-asp"
-        },
-        "siteName": {
-            "value": "bmossberg-ex3"
-        },
-        "containerRegistryImageName": {
-            "value": "bmossbergapp-ex3"
-        }
+      "location": {
+        "value": "Central Sweden"
+      },
+      "keyVaultName": {
+        "value": "mossberg-kv"
+      },
+      "containerRegistryName": {
+        "value": "mossbergacr"
+      },
+      "appServicePlanName": {
+        "value": "mossberg-asp"
+      },
+      "siteName": {
+        "value": "mossberg-ex3"
+      },
+      "containerRegistryImageName": {
+        "value": "mossbergapp-ex3"
+      }
     }
-}
+  }
