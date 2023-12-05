@@ -6,12 +6,12 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY_LOGIN_SERVER: "felixggacr.azurecr.io"
+  REGISTRY_LOGIN_SERVER: "mossbergacr.azurecr.io"
   KEY_VAULT_SECRET_NAME_ACR_USERNAME: "acr-username"
   KEY_VAULT_SECRET_NAME_ACR_PASSWORD: "acr-password1"
-  KEY_VAULT_NAME: "felixgg-kv"
-  IMAGE_BASE_NAME: "felixggapp-ex3"
-  AZURE_WEBAPP_NAME: "felixgg-ex3"
+  KEY_VAULT_NAME: "mossberg-kv"
+  IMAGE_BASE_NAME: "mossbergapp-ex3"
+  AZURE_WEBAPP_NAME: "mossberg-ex3"
 
 jobs:
   build:
